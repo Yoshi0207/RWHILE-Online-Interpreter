@@ -45,6 +45,12 @@ DB_PASSWORD=secret
 を各環境のデータベースの設定に合わせて書き換える
 
 （例）sqlite3の場合
+.env
+```
+DB_CONNECTION=sqlite
+```
+に変更し上記以外の項目は削除する
+
 ```
 touch database/database.sqlite
 php artisan migrate

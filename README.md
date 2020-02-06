@@ -35,7 +35,7 @@ opam install extlib ocamlfind
 + RWHILE-Online-Interpreterディレクトリ内
 .envファイルを作成
 ```
-cp .env. .env
+cp .env.example .env
 ```
 .env内
 ```

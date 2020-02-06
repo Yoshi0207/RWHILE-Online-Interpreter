@@ -44,7 +44,7 @@ DB_PASSWORD=secret
 ```
 を各環境のデータベースの設定に合わせて書き換える
 
-（例）sqlite3の場合
+（例）sqlite3の場合  
 .env
 ```
 DB_CONNECTION=sqlite

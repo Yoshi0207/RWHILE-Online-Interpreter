@@ -33,7 +33,7 @@ opam switch
 opam install extlib ocamlfind
 ```
 
-+ .envファイル内
++ .env.sampleの名前を.envに変更しそのファイル内の
 ```
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1

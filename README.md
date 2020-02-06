@@ -32,7 +32,7 @@ opam switch
 opam install extlib ocamlfind
 ```
 
-+ RWHILE-Online-Interpreterディレクトリ内
++ RWHILE-Online-Interpreterディレクトリ内  
 .envファイルを作成
 ```
 cp .env.example .env

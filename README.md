@@ -32,7 +32,12 @@ opam switch
 opam install extlib ocamlfind
 ```
 
-+ .env.sampleの名前を.envに変更しそのファイル内の
++ RWHILE-Online-Interpreterディレクトリ内
+.envファイルを作成
+```
+cp .env.sample .env
+```
+.env内
 ```
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1

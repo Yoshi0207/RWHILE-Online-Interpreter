@@ -1,19 +1,18 @@
 # RWHILE-Online-Interpreter
 R-WHILEのオンラインインタプリタ  
-phpのライブラリLaravelを使用している
 
 ## Requirements
 + php
-+ composer
++ composer(Laravel)
 + OCaml
-+ ocamlfind
-+ ocamlyacc
++ Ocamlfind
++ Ocamlyacc
 + extlib
 + The BNF Converter: http://bnfc.digitalgrammars.com/
 
 ## Linux Ubuntu にてインストール例
 ```
-git clone 
+git clone
 sudo apt update
 ```
 
@@ -45,7 +44,6 @@ DB_PASSWORD=secret
 を各環境のデータベースの設定に合わせて書き換える
 
 （例）sqlite3の場合  
-.env
 ```
 DB_CONNECTION=sqlite
 ```
@@ -69,7 +67,7 @@ chmod 777 data
 chmod 777 programs
 ```
 
-+ アプリケーションキー？を設定
++ アプリケーションキーを設定
 ```
 php artisan key:generate
 php artisan config:clear
@@ -95,4 +93,3 @@ OCAMLC=ocamlfind ocamlc -unsafe-string -g -package extlib -linkpkg
 ```
 sudo apt-get install php-gd php-xml php7.4-mbstring
 ```
-

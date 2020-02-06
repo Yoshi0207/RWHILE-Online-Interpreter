@@ -12,7 +12,7 @@ R-WHILEのオンラインインタプリタ
 
 ## Linux Ubuntu にてインストール例
 ```
-git clone
+git clone https://github.com/Yoshi0207/RWHILE-Online-Interpreter.git
 sudo apt update
 ```
 

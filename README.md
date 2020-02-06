@@ -17,7 +17,7 @@ git clone
 sudo apt update
 ```
 
-+ composerをインストール
++ composerをインストール(Laravelに必要)
 ```
 curl -sS https://getcomposer.org/installer | php
 cd RWHILE-Online-Interpreter
@@ -43,6 +43,7 @@ DB_USERNAME=homestead
 DB_PASSWORD=secret
 ```
 を各環境のデータベースの設定に合わせて書き換える
+
 （例）sqlite3の場合
 ```
 touch database/database.sqlite

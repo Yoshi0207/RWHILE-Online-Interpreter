@@ -91,5 +91,5 @@ OCAMLC=ocamlfind ocamlc -unsafe-string -g -package extlib -linkpkg
 
 + ./composer.phar installでエラーが出た場合は以下のコマンドで解決する可能性がある
 ```
-sudo apt-get install php-gd php-xml php7.4-mbstring
+sudo apt-get install php-gd php-xml php[使用しているphpのバージョン]-mbstring
 ```

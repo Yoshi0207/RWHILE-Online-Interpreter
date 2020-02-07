@@ -28,7 +28,8 @@
       <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <form name ="input_form" action="execute.php" method="post" onsubmit="get_javascript_variable()">
+          <form name ="input_form" action="{{ url('/execute')}}" method="post" onsubmit="get_javascript_variable()">
+              {{ csrf_field() }}
               <input type="hidden" name="prog" value="">
               <input type="hidden" name="data" value="">
               <input type="hidden" name="invert" value="">
@@ -40,7 +41,7 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="example" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sample</a>
           <div class="dropdown-menu" aria-labelledby="example">
-            <a class="dropdown-item" href="/0">reverse</a>
+            <a class="dropdown-item" href="0">reverse</a>
             <a class="dropdown-item" href="1">swap</a>
             <a class="dropdown-item" href="2">translation from a tree to its preorder and inorder traversal (piorder)</a>
             <a class="dropdown-item" href="3">self-interpretation of an identity function</a>

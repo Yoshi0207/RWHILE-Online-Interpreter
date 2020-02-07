@@ -4,6 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+function convertEOL($string, $to = "\n")
+{
+    return strtr($string, array(
+        "\r\n" => $to,
+        "\r" => $to,
+        "\n" => $to,
+    ));
+}
+
 class RWHILEController extends Controller
 {
   public function index()
@@ -62,12 +71,73 @@ class RWHILEController extends Controller
     return view('index', compact('program', 'data'));
   }
 
-  public function edit($id)
+  public function execute(Request $request)
   {
-    // DBよりURIパラメータと同じIDを持つBookの情報を取得
-    $book = Book::findOrFail($id);
+    $program = $request->prog;
+    $data = $request->data;
 
-    // 取得した値をビュー「book/edit」に渡す
-    return view('book/edit', compact('book'));
+    set_time_limit(10);             // 時間制限の設定
+
+    $dir = public_path();
+    $cmd = "timeout -sKILL 10 $dir/ri";
+
+    // 引数の設定
+    $invert = $request->invert;
+    $p2d =    $request->p2d;
+    $exp =    $request->exp;
+    $ri_flags = array();
+    if ($invert) { $cmd .= " -inverse"; }
+    if ($p2d)    { $cmd .= " -p2d"; }
+    if ($exp)    { $cmd .= " -exp"; }
+
+    // プログラムを保存する
+    $prog_text = convertEOL($program);
+    $prog_hash = substr(sha1($prog_text), 0, 8);
+    $res = file_put_contents("$dir/programs/$prog_hash.rwhile", $prog_text);
+    if ($res === FALSE) {
+        header("HTTP/1.1 500 Internal Server Error");
+        exit;
+    }
+    $cmd .= " $dir/programs/$prog_hash.rwhile";
+
+    // データを保存する
+    $data_text = convertEOL($data);
+    $data_hash = substr(sha1($data_text), 0, 8);
+    $res = file_put_contents("$dir/data/$data_hash.rwhile", $data_text);
+    if ($res === FALSE) {
+        header("HTTP/1.1 500 Internal Server Error");
+        exit;
+    }
+    if (!($invert || $p2d || $exp)) {
+    	$cmd .= " $dir/data/$data_hash.rwhile";
+    }
+
+    $cwd = "/tmp";
+    $descriptorspec = array(
+        0 => array("pipe", "r"),
+        1 => array("pipe", "w")
+    );
+    $env = array();
+
+    // echo $cmd . "\n";
+    $process = proc_open($cmd, $descriptorspec, $pipes, $cwd, $env);
+
+    if (is_resource($process)) {
+
+        fwrite($pipes[0], $prog_text);
+        fclose($pipes[0]);
+
+        $output = stream_get_contents($pipes[1]);
+        fclose($pipes[1]);
+
+        $return_value = proc_close($process);
+
+        // echo $return_value . "\n";
+
+        if ($return_value === 124) {
+          echo "Execution timed out!\n";
+        }
+      }
+    return view('execute', compact('output'));
   }
 }

@@ -13,6 +13,7 @@
 
 Route::get('/', 'RWHILEController@index');
 Route::get('/{id}', 'RWHILEController@index_sample');
+Route::post('/execute', 'RWHILEController@execute');
 
 /*Route::get('/', function () {
   $program = "test";

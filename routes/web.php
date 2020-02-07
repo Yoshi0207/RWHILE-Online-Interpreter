@@ -11,6 +11,21 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', 'RWHILEController@index');
+Route::get('/{id}', 'RWHILEController@index_sample');
+
+/*Route::get('/', function () {
+  $program = "test";
+  $data = "test";
+  return view('index', compact('program','data'));
 });
+
+Route::get('/index', function () {
+    return view('index');
+});
+
+Route::get('/index/{id}', function ($id) {
+    #$data["program"] = "test";
+    #$data["data"] = "test";
+
+});*/

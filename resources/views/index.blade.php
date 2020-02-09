@@ -124,7 +124,7 @@
             <div class="col-md-12 col-sm-12 codeSide" id="programinput">
             <h3>R-WHILE code</h3>
             <input id="rwhile-code" type="hidden" value="{{ $program }}">
-            <div id="code" style="height: 78vh; width: 100%"></div>
+            <div id="code" style="height: 75vh; width: 100%"></div>
             <script>
               var editor1 = ace.edit("code");
               var js_var = $('#rwhile-code').val();
@@ -144,7 +144,7 @@
             <div class="col-md-12 col-sm-12 codeSide" id="codeinput">
               <h3>Input data</h3>
               <input id="input-data" type="hidden" value="{{ $data }}">
-              <div id="data" style="height: 42vh; width: 100%"></div>
+              <div id="data" style="height: 40vh; width: 100%"></div>
               <script>
                 var js_var = $('#input-data').val();
                 var editor2 = ace.edit("data");

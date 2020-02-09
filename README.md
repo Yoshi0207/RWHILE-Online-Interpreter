@@ -79,7 +79,7 @@ php artisan serve
 ## 注意点
 + 本番環境にデプロイする場合は，laravelの設定を本番環境用に変更する
 
-+ パーミッションが必要なディレクトリ下で本アプリケーションを使用する場合，ディレクトリpublicの中に data, programs を書き込みできるようにする．
++ パーミッションが必要なディレクトリ下で本アプリケーションを使用する場合，ディレクトリpublicの中の data, programs に書き込みできるようにする．
 ```
 chmod 777 data
 chmod 777 programs

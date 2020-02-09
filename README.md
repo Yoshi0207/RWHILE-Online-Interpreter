@@ -11,9 +11,9 @@ R-WHILEのオンラインインタプリタ
 + The BNF Converter: http://bnfc.digitalgrammars.com/
 
 ## Linux Ubuntu にてインストール例
++ 本アプリケーションをダウンロード
 ```
 git clone https://github.com/Yoshi0207/RWHILE-Online-Interpreter.git
-sudo apt update
 ```
 
 + composerをインストール(Laravelに必要)
@@ -25,6 +25,7 @@ cd RWHILE-Online-Interpreter
 
 + OCamlをインストール
 ```
+sudo apt update
 sudo apt install opam
 opam init
 opam update
@@ -32,12 +33,12 @@ opam switch
 opam install extlib ocamlfind
 ```
 
-+ RWHILE-Online-Interpreterディレクトリ内  
-.envファイルを作成
++ RWHILE-Online-Interpreterディレクトリ内に.envファイルを作成する
 ```
 cp .env.example .env
 ```
-.env内
+
++ .envファイルを各環境のデータベースの設定に合わせて書き換える
 ```
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
@@ -46,7 +47,6 @@ DB_DATABASE=homestead
 DB_USERNAME=homestead
 DB_PASSWORD=secret
 ```
-を各環境のデータベースの設定に合わせて書き換える
 
 （例）sqlite3の場合  
 ```
@@ -65,13 +65,6 @@ cd src
 make
 ```
 
-+ ディレクトリwebの中に data, programs を書き込みできるようにする．
-```
-mkdir data programs
-chmod 777 data
-chmod 777 programs
-```
-
 + アプリケーションキーを設定
 ```
 php artisan key:generate
@@ -84,6 +77,15 @@ php artisan serve
 ```
 
 ## 注意点
++ 本番環境にデプロイする場合は，laravelのセキュリティ設定を本番環境用に変更する
+
++ パーミッションが必要なディレクトリ下で本アプリケーションを使用する場合，ディレクトリpublicの中に data, programs を書き込みできるようにする．
+```
+mkdir data programs
+chmod 777 data
+chmod 777 programs
+```
+
 + 新しいバージョンのOCamlを使用する場合は，Makefile中の
 ```
 OCAMLC=ocamlfind ocamlc -g -package extlib -linkpkg
@@ -95,7 +97,6 @@ OCAMLC=ocamlfind ocamlc -unsafe-string -g -package extlib -linkpkg
 に変更する必要がある
 
 + ./composer.phar installでエラーが出た場合は以下のコマンドで解決する可能性がある  
-(php7以上にはプリインストールされていない？ため)
 ```
 sudo apt-get install php-gd php-xml php[使用しているphpのバージョン]-mbstring
 ```

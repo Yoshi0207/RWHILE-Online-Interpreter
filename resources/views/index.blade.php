@@ -54,9 +54,6 @@
         <li class="nav-item">
           <a class="nav-link" href="#"><i class="fab fa-github my-icon"></i></a>
         </li>
-        <li>
-          <button class="btn btn-brand" type="button" name="button" id="test" width="35pv" height="40pv"></button>
-        </li>
       </ul>
       </div>
     </nav>

@@ -19,16 +19,20 @@
     <script src="js/ace/ace.js" charset="utf-8"></script>
     <script src="/js/main.js"></script>
 
+    <!--ナビゲーションバー-->
     <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+      <!--ブランド-->
       <a class="navbar-brand" href="#">R-WHILE PLAYGROUND</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="ナビゲーション切り替え">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav mr-auto">
+        <!--Executeボタン-->
         <li class="nav-item">
           <button class="square_btn" id="execute" type="button" name="button">Execute</button>
         </li>
+        <!--サンプルリスト-->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="example" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sample</a>
           <div class="dropdown-menu" aria-labelledby="example">
@@ -43,13 +47,16 @@
             <a class="dropdown-item" href="8">Enumeration of trees</a>
           </div>
         </li>
+        <!--オプション-->
         <li class="nav-item">
           <a class="nav-link" href="#option" data-toggle="modal">Options  <i class="fas fa-cogs"></i></a>
         </li>
+        <!--概要-->
         <li class="nav-item">
           <a class="nav-link" href="#about" data-toggle="modal">About</a>
         </li>
         </ul>
+        <!--右側の要素-->
         <ul class="navbar-nav">
         <li class="nav-item">
           <a class="nav-link" href="#"><i class="fab fa-github my-icon"></i></a>
@@ -58,6 +65,7 @@
       </div>
     </nav>
 
+    <!--モーダル(オプション)-->
     <div class="modal fade" id="option" tabindex="-1" role="dialog" aria-labelledby="option" aria-hidden="true">
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -85,6 +93,7 @@
       </div>
     </div>
 
+    <!--モーダル(概要)-->
     <div class="modal fade" id="about" tabindex="-1" role="dialog" aria-labelledby="about" aria-hidden="true">
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -98,7 +107,6 @@
             <p>You can load example programs by clicking on the <b>Sample</b> dropdown in the menu and selecting an example which will then be loaded into the text area.</p>
             <p>The code in the text area can be run by pressing the <b>Execute</b> button in the menu and the result will appear.</p>
             <p>If you wish to see the inversion of the program currently written in the text area, press the <b>Option</b> button. The inverted program will then show up in the result window.</p>
-            <p>If the program fails, the error will be show in red in the result window. The error will explain you what went wrong and in which line, and give you useful information about the program state, for example it prints the variable store when the error occured.</p>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-brand" data-dismiss="modal">close</button>
@@ -107,9 +115,11 @@
       </div>
   </div>
 
+  <!--メインコンテンツ-->
   <div class="py-3">
     <div class="container-fluid">
         <div class="form-group row">
+          <!--Rwhile_code-->
           <div class="col-lg-7">
             <div class="col-md-12 col-sm-12 codeSide" id="programinput">
             <h3>R-WHILE code</h3>
@@ -128,9 +138,10 @@
               }
             </script>
             </div>
-            </div>
-            <div class="col-lg-5">
-              <div class="col-md-12 col-sm-12 codeSide" id="codeinput">
+          </div>
+          <!--data,result-->
+          <div class="col-lg-5">
+            <div class="col-md-12 col-sm-12 codeSide" id="codeinput">
               <h3>Input data</h3>
               <input id="input-data" type="hidden" value="{{ $data }}">
               <div id="data" style="height: 42vh; width: 100%"></div>
@@ -146,14 +157,12 @@
                   value2 = editor2.getValue();
                 }
               </script>
-              </div>
-              <div class="codeSide" id="showresult">
-                <h3>Result</h3>
-                <textarea id="output" disabled>
-
-                </textarea>
-              </div>
             </div>
+            <div class="codeSide" id="showresult">
+              <h3>Result</h3>
+              <textarea id="output" disabled></textarea>
+            </div>
+          </div>
         </div>
       </div>
     </div>

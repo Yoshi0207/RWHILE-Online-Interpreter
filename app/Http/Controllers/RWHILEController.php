@@ -17,12 +17,8 @@ class RWHILEController extends Controller
 {
   public function index()
   {
-    // DBよりBookテーブルの値を全て取得
-    #$books = Book::all();
     $program = "";
     $data = "";
-    // 取得した値をビュー「book/index」に渡す
-    printf($program);
     return view('index', compact('program', 'data'));
   }
 

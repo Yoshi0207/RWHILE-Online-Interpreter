@@ -33,11 +33,17 @@ opam switch
 opam install extlib ocamlfind
 ```
 
++ ディレクトリsrcに移動しコンパイルする
+```
+cd src
+make
+```
+
 + RWHILE-Online-Interpreterディレクトリ内に.envファイルを作成する
 ```
 cp .env.example .env
 ```
-
+<!--
 + .envファイルを各環境のデータベースの設定に合わせて書き換える
 ```
 DB_CONNECTION=mysql
@@ -58,13 +64,7 @@ DB_CONNECTION=sqlite
 touch database/database.sqlite
 php artisan migrate
 ```
-
-+ ディレクトリsrcに移動しコンパイルする
-```
-cd src
-make
-```
-
+-->
 + アプリケーションキーを設定
 ```
 php artisan key:generate
@@ -77,11 +77,10 @@ php artisan serve
 ```
 
 ## 注意点
-+ 本番環境にデプロイする場合は，laravelのセキュリティ設定を本番環境用に変更する
++ 本番環境にデプロイする場合は，laravelの設定を本番環境用に変更する
 
 + パーミッションが必要なディレクトリ下で本アプリケーションを使用する場合，ディレクトリpublicの中に data, programs を書き込みできるようにする．
 ```
-mkdir data programs
 chmod 777 data
 chmod 777 programs
 ```

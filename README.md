@@ -33,12 +33,6 @@ opam switch
 opam install extlib ocamlfind
 ```
 
-+ ディレクトリsrcに移動しコンパイルする
-```
-cd src
-make install
-```
-
 + RWHILE-Online-Interpreterディレクトリ内に.envファイルを作成する
 ```
 cp .env.example .env
@@ -69,6 +63,12 @@ php artisan migrate
 ```
 php artisan key:generate
 php artisan config:clear
+```
+
++ ディレクトリsrcに移動しコンパイルする
+```
+cd src
+make install
 ```
 
 + 以下のコマンドでローカルサーバを起動できる

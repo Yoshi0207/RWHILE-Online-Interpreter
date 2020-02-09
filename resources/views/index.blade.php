@@ -5,6 +5,7 @@
     <title>R-WHILE Playground</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Write and run R-WHILE programs in your browser">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!--<link href="static/css/bootstrap.min.css" rel="stylesheet">-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
@@ -15,6 +16,7 @@
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <!--<script src="static/js/jquery-3.3.1.slim.min.js"></script>
     <script src="static/js/bootstrap.bundle.min.js"></script>-->
     <script src="js/ace/ace.js" charset="utf-8"></script>
@@ -28,7 +30,8 @@
       <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <form name ="input_form" action="{{ url('/execute')}}" method="post" onsubmit="get_javascript_variable()">
+          <button class="square_btn" id="execute" type="button" name="button">Execute</button>
+          <!--<form name ="input_form" action="{{ url('/execute')}}" method="post" onsubmit="get_javascript_variable()">
               {{ csrf_field() }}
               <input type="hidden" name="prog" value="">
               <input type="hidden" name="data" value="">
@@ -36,7 +39,7 @@
               <input type="hidden" name="p2d" value="">
               <input type="hidden" name="exp" value="">
               <button type="submit" class="square_btn"><i class="fas fa-step-forward"></i>Excute</button>
-          </form>
+          </form>-->
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="example" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sample</a>
@@ -64,7 +67,7 @@
           <a class="nav-link" href="#"><i class="fab fa-github my-icon"></i></a>
         </li>
         <li>
-          <img src="css/ty.png" class="button" onclick="goClick()" width="35pv" height="40pv">
+          <button class="btn btn-brand" type="button" name="button" id="test" width="35pv" height="40pv"></button>
         </li>
       </ul>
       </div>
@@ -126,7 +129,7 @@
             <div class="col-md-12 col-sm-12 codeSide" id="programinput">
             <h3>R-WHILE code</h3>
             <input id="rwhile-code" type="hidden" value="{{ $program }}">
-            <div id="code" style="height: 75vh; width: 100%"></div>
+            <div id="code" style="height: 82vh; width: 100%"></div>
             <script>
               var editor1 = ace.edit("code");
               var js_var = $('#rwhile-code').val();
@@ -142,26 +145,67 @@
             </div>
             </div>
             <div class="col-lg-5">
-            <div class="col-md-12 col-sm-12 codeSide" id="codeinput">
-            <h3>Input data</h3>
-            <input id="input-data" type="hidden" value={!!$data!!}>
-            <div id="data" style="height: 50vh; width: 100%"></div>
-            <script>
-              var js_var = $('#input-data').val();
-              var editor2 = ace.edit("data");
-              editor2.setFontSize(14);
-              editor2.setTheme("ace/theme/tommorow");
-              editor2.getSession().setUseWrapMode(true);
-              editor2.setValue(js_var,-1)
-              var value2;
-              function get_value2_variable(){
-                value2 = editor2.getValue();
-              }
-            </script>
-            </div>
+              <div class="col-md-12 col-sm-12 codeSide" id="codeinput">
+              <h3>Input data</h3>
+              <input id="input-data" type="hidden" value={!!$data!!}>
+              <div id="data" style="height: 42vh; width: 100%"></div>
+              <script>
+                var js_var = $('#input-data').val();
+                var editor2 = ace.edit("data");
+                editor2.setFontSize(14);
+                editor2.setTheme("ace/theme/tommorow");
+                editor2.getSession().setUseWrapMode(true);
+                editor2.setValue(js_var,-1)
+                var value2;
+                function get_value2_variable(){
+                  value2 = editor2.getValue();
+                }
+              </script>
+              </div>
+              <div class="codeSide" id="showresult">
+                <h3>Result</h3>
+                <textarea id="output" disabled>
+
+                </textarea>
+              </div>
             </div>
         </div>
       </div>
     </div>
+    <script>
+      $("#execute").on('click',function(){
+        var inv = 0;
+        var p2 = 0;
+        var ex = 0;
+        get_value1_variable();
+        get_value2_variable();
+        if(document.getElementById("customCheck1").checked){
+          inv = 1;
+        }
+        if(document.getElementById("customCheck2").checked){
+          p2 = 1;
+        }
+        if(document.getElementById("customCheck3").checked){
+          ex = 1;
+        }
+        $.ajax({
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            url: "execute",
+            type: 'post',
+            dataType: 'json',
+            data : {
+                "prog" : value1,
+                "data" : value2,
+                "invert" : inv,
+                "p2d" : p2,
+                "exp" : ex
+            },
+        }).done(function(data){
+            $("#output").text(data["output"]);
+        }).fail(function(jqXHR,textStatus,errorThrown){ //ajaxの通信に失敗した場合
+            $("#output").text("Syntax error!");
+        });
+      });
+    </script>
   </body>
 </html>

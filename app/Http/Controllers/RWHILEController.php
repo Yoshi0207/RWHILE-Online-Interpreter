@@ -73,8 +73,8 @@ class RWHILEController extends Controller
 
   public function execute(Request $request)
   {
-    $program = $request->prog;
-    $data = $request->data;
+    $program = $request->input('prog');
+    $data = $request->input('data');
 
     set_time_limit(10);             // 時間制限の設定
 
@@ -82,9 +82,9 @@ class RWHILEController extends Controller
     $cmd = "timeout -sKILL 10 $dir/ri";
 
     // 引数の設定
-    $invert = $request->invert;
-    $p2d =    $request->p2d;
-    $exp =    $request->exp;
+    $invert = $request->input('invert');
+    $p2d =    $request->input('p2d');
+    $exp =    $request->input('exp');
     $ri_flags = array();
     if ($invert) { $cmd .= " -inverse"; }
     if ($p2d)    { $cmd .= " -p2d"; }
@@ -109,7 +109,7 @@ class RWHILEController extends Controller
         exit;
     }
     if (!($invert || $p2d || $exp)) {
-    	$cmd .= " $dir/data/$data_hash.rwhile";
+      $cmd .= " $dir/data/$data_hash.rwhile";
     }
 
     $cwd = "/tmp";
@@ -135,9 +135,11 @@ class RWHILEController extends Controller
         // echo $return_value . "\n";
 
         if ($return_value === 124) {
-          echo "Execution timed out!\n";
+          $output = "Execution timed out!\n";
         }
       }
-    return view('execute', compact('output'));
+    $response = array();
+    $response["output"] = $output;
+    return $response;
   }
 }

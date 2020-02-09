@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Write and run R-WHILE programs in your browser">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <!--<link href="static/css/bootstrap.min.css" rel="stylesheet">-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
     <link rel="stylesheet" href="css/main.css">
@@ -17,8 +16,6 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <!--<script src="static/js/jquery-3.3.1.slim.min.js"></script>
-    <script src="static/js/bootstrap.bundle.min.js"></script>-->
     <script src="js/ace/ace.js" charset="utf-8"></script>
     <script src="/js/main.js"></script>
 
@@ -31,15 +28,6 @@
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
           <button class="square_btn" id="execute" type="button" name="button">Execute</button>
-          <!--<form name ="input_form" action="{{ url('/execute')}}" method="post" onsubmit="get_javascript_variable()">
-              {{ csrf_field() }}
-              <input type="hidden" name="prog" value="">
-              <input type="hidden" name="data" value="">
-              <input type="hidden" name="invert" value="">
-              <input type="hidden" name="p2d" value="">
-              <input type="hidden" name="exp" value="">
-              <button type="submit" class="square_btn"><i class="fas fa-step-forward"></i>Excute</button>
-          </form>-->
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="example" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sample</a>
@@ -129,7 +117,7 @@
             <div class="col-md-12 col-sm-12 codeSide" id="programinput">
             <h3>R-WHILE code</h3>
             <input id="rwhile-code" type="hidden" value="{{ $program }}">
-            <div id="code" style="height: 82vh; width: 100%"></div>
+            <div id="code" style="height: 78vh; width: 100%"></div>
             <script>
               var editor1 = ace.edit("code");
               var js_var = $('#rwhile-code').val();
@@ -147,7 +135,7 @@
             <div class="col-lg-5">
               <div class="col-md-12 col-sm-12 codeSide" id="codeinput">
               <h3>Input data</h3>
-              <input id="input-data" type="hidden" value={!!$data!!}>
+              <input id="input-data" type="hidden" value="{{ $data }}">
               <div id="data" style="height: 42vh; width: 100%"></div>
               <script>
                 var js_var = $('#input-data').val();

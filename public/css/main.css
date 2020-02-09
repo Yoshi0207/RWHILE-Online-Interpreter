@@ -6,7 +6,7 @@ body {
 
 #programinput {
     background: #f5f5f5;
-    height: 90vh;
+    height: 85vh;
     padding-left: 21px;
     border-radius: 10px;
     padding-top: 7px;
@@ -26,32 +26,16 @@ body {
   border-radius: 10px;
   margin-top: 10px;
   padding-top: 7px;
-  height: 40vh;
+  height: 35vh;
 }
 
 #showresult textarea {
-  height: 33vh;
+  height: 28vh;
   width: 98%;
 }
 
-#result {
-    background: #f5f5f5;
-    height: 85vh;
-    padding-left: 21px;
-    border-radius: 10px;
-    padding-top: 10px;
-}
-
-
-
 h3 {
   font-family: 'ZCOOL QingKe HuangYou', cursive;
-}
-
-
-#resulttestbox {
-width: 100%;
-height: 75vh;
 }
 
 .navbar li button {

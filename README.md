@@ -36,7 +36,7 @@ opam install extlib ocamlfind
 + ディレクトリsrcに移動しコンパイルする
 ```
 cd src
-make
+make install
 ```
 
 + RWHILE-Online-Interpreterディレクトリ内に.envファイルを作成する
